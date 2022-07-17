@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Assets/Fonts/Arialn.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/Envirnonment Scripts/UserCard.gd" type="Script" id=2]
+[ext_resource path="res://Assets/3D Models/Textures/gray.png" type="Texture" id=3]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("UserCard/Viewport")
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="BoxShape" id=3]
+extents = Vector3( 0.506549, 0.0231249, 0.315079 )
+
+[sub_resource type="CubeMesh" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_texture = ExtResource( 3 )
+
+[node name="UserCard" type="KinematicBody"]
+transform = Transform( 1.54, 0, 0, 0, 1, 0, 0, 0, 1.4, 0, 0, 0 )
+script = ExtResource( 2 )
+
+[node name="Text" type="Sprite3D" parent="."]
+transform = Transform( 0.255945, 0, 0, 0, 0.0598431, 0, 0, 0, 0.183673, 0.119766, 0.00852395, 0.137649 )
+flip_v = true
+axis = 1
+texture = SubResource( 1 )
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 400, 800 )
+transparent_bg = true
+msaa = 4
+fxaa = true
+sharpen_intensity = 1.0
+usage = 0
+
+[node name="Label" type="Label" parent="Viewport"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 2 )
+text = "SAMPLE TEXT"
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.109291, 0, -0.31672 )
+shape = SubResource( 3 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 0.524318, 0, 0, 0, 0.0224824, 0, 0, 0, 0.3101, 0.123442, -0.0177831, -0.317173 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
+
+[node name="Tween" type="Tween" parent="."]
